@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NurseAI Guide — Prototipo Alta Resolución</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <meta name="description" content="Guía interactiva de herramientas de IA para auxiliares de enfermería en Colombia">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ═══════════════════════════ SIDEBAR ═══════════════════════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">🏥</div>
+      <div class="logo-text">
+        <h2>NurseAI Guide</h2>
+        <span>Salud Digital</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <span class="nav-section-label">Principal</span>
+      <a class="nav-item active" data-page="dashboard">
+        <span class="nav-icon">🏠</span> Dashboard
+      </a>
+      <a class="nav-item" data-page="recommendations">
+        <span class="nav-icon">⭐</span> Recomendaciones
+        <span class="nav-badge">8</span>
+      </a>
+      <a class="nav-item" data-page="tutorials">
+        <span class="nav-icon">🎓</span> Tutoriales
+      </a>
+
+      <span class="nav-section-label">Herramientas</span>
+      <a class="nav-item" data-page="comparator">
+        <span class="nav-icon">⚖️</span> Comparador IA
+      </a>
+      <a class="nav-item" data-page="progress">
+        <span class="nav-icon">📊</span> Mi Progreso
+      </a>
+
+      <span class="nav-section-label">Institución</span>
+      <a class="nav-item" data-page="admin">
+        <span class="nav-icon">🏛️</span> Panel Admin
+      </a>
+      <a class="nav-item" data-page="subscription">
+        <span class="nav-icon">💳</span> Suscripción
+      </a>
+    </nav>
+
+    <div class="sidebar-user" onclick="navigate('progress')">
+      <div class="user-avatar">AM</div>
+      <div class="user-info">
+        <div class="name">Ana Moreno</div>
+        <div class="role">Aux. Enfermería · Pro</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ═══════════════════════════ MAIN ═══════════════════════════ -->
+  <main class="main-content">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div>
+        <div class="topbar-title" id="page-title">Dashboard</div>
+        <div class="topbar-subtitle" id="page-subtitle">Tu centro de control de IA en enfermería</div>
+      </div>
+      <div class="search-bar">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Buscar herramientas, tutoriales...">
+      </div>
+      <div class="topbar-actions">
+        <button class="btn btn-outline btn-sm" id="offline-btn" onclick="toggleOffline()">📥 Offline</button>
+        <button class="btn-icon" onclick="navigate('progress')">
+          🔔
+          <span class="badge"></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="page-content">
+
+      <!-- OFFLINE BANNER -->
+      <div class="offline-banner" id="offline-banner" style="display:none">
+        📵 Modo sin conexión activo — Mostrando contenido descargado
+        <button class="btn btn-sm" style="margin-left:auto;background:white" onclick="toggleOffline()">Reconectar</button>
+      </div>
+
+      <!-- ═══════════ PAGE: DASHBOARD ═══════════ -->
+      <div class="page active" id="page-dashboard">
+
+        <!-- Welcome -->
+        <div class="welcome-banner">
+          <div class="welcome-text">
+            <h1>¡Hola, Ana! 👋</h1>
+            <p>Bienvenida de nuevo. Tienes <strong>2 tutoriales pendientes</strong> y <strong>3 nuevas herramientas</strong> recomendadas para UCI Adultos. ¡Sigue aprendiendo!</p>
+            <div style="display:flex;gap:10px;margin-top:16px">
+              <button class="btn btn-primary btn-sm" onclick="navigate('tutorials')">▶ Continuar aprendizaje</button>
+              <button class="btn btn-outline btn-sm" style="border-color:rgba(255,255,255,0.3);color:white" onclick="navigate('recommendations')">⭐ Ver recomendaciones</button>
+            </div>
+          </div>
+          <div class="welcome-badge">
+            <div class="badge-num">🔥 14</div>
+            <div class="badge-label">días de racha</div>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+          <div class="stat-card" onclick="navigate('tutorials')">
+            <div class="stat-icon green">🎓</div>
+            <div class="stat-info">
+              <div class="value" id="completed-count">2</div>
+              <div class="label">Tutoriales completados</div>
+              <div class="trend">↑ +1 esta semana</div>
+            </div>
+          </div>
+          <div class="stat-card" onclick="navigate('recommendations')">
+            <div class="stat-icon blue">🤖</div>
+            <div class="stat-info">
+              <div class="value">6</div>
+              <div class="label">Herramientas exploradas</div>
+              <div class="trend">↑ +2 nuevas</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon orange">⚡</div>
+            <div class="stat-info">
+              <div class="value">14</div>
+              <div class="label">Días de racha activa</div>
+              <div class="trend">🔥 ¡Récord personal!</div>
+            </div>
+          </div>
+          <div class="stat-card" onclick="navigate('progress')">
+            <div class="stat-icon purple">🏅</div>
+            <div class="stat-info">
+              <div class="value">4</div>
+              <div class="label">Logros desbloqueados</div>
+              <div class="trend">↑ 2 por alcanzar</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Two col -->
+        <div class="two-col">
+          <div>
+            <div class="section-header">
+              <h2>⭐ Recomendado para ti</h2>
+              <a class="link-all" onclick="navigate('recommendations')">Ver todo →</a>
+            </div>
+            <div class="cards-grid" id="dash-tools-grid"></div>
+          </div>
+
+          <div>
+            <!-- Progress -->
+            <div class="progress-card" style="margin-bottom:16px">
+              <h3>📈 Progreso de competencias</h3>
+              <div class="progress-item">
+                <div class="progress-item-header">
+                  <span class="pname">IA Básica</span>
+                  <span class="pval">85%</span>
+                </div>
+                <div class="progress-bar"><div class="progress-fill" style="width:85%"></div></div>
+              </div>
+              <div class="progress-item">
+                <div class="progress-item-header">
+                  <span class="pname">Documentación Digital</span>
+                  <span class="pval">60%</span>
+                </div>
+                <div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div>
+              </div>
+              <div class="progress-item">
+                <div class="progress-item-header">
+                  <span class="pname">Seguridad del Paciente</span>
+                  <span class="pval">100%</span>
+                </div>
+                <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+              </div>
+              <div class="progress-item">
+                <div class="progress-item-header">
+                  <span class="pname">Monitoreo con IA</span>
+                  <span class="pval">40%</span>
+                </div>
+                <div class="progress-bar"><div class="progress-fill" style="width:40%"></div></div>
+              </div>
+            </div>
+
+            <!-- Notifications -->
+            <div class="notification-card">
+              <h3>🔔 Notificaciones</h3>
+              <div class="notif-item">
+                <div class="notif-dot new"></div>
+                <div>
+                  <div class="notif-text">Nueva herramienta validada para UCI: <strong>MedAI v3.0</strong></div>
+                  <div class="notif-time">Hace 2 horas</div>
+                </div>
+              </div>
+              <div class="notif-item">
+                <div class="notif-dot info"></div>
+                <div>
+                  <div class="notif-text">Recuerda completar: <strong>Documentación Clínica Automatizada</strong></div>
+                  <div class="notif-time">Hace 1 día</div>
+                </div>
+              </div>
+              <div class="notif-item">
+                <div class="notif-dot warn"></div>
+                <div>
+                  <div class="notif-text">Tu institución asignó ruta obligatoria: <strong>Seguridad con IA</strong></div>
+                  <div class="notif-time">Hace 2 días</div>
+                </div>
+              </div>
+              <div class="notif-item">
+                <div class="notif-dot new"></div>
+                <div>
+                  <div class="notif-text">¡Lograste el badge <strong>Explorador IA</strong>! 🏅</div>
+                  <div class="notif-time">Hace 3 días</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════ PAGE: RECOMENDACIONES ═══════════ -->
+      <div class="page" id="page-recommendations">
+        <!-- Profile Match Card -->
+        <div class="rec-profile-card">
+          <div class="rec-profile-visual">👩‍⚕️</div>
+          <div style="flex:1">
+            <div style="font-size:14px;color:var(--text-muted);margin-bottom:6px">Recomendaciones basadas en tu perfil</div>
+            <div style="font-size:18px;font-weight:800;margin-bottom:8px">Ana Moreno · UCI Adultos · Nivel Intermedio</div>
+            <div class="match-bar">
+              <span class="match-val">92%</span>
+              <div class="bar"><div class="fill" style="width:92%"></div></div>
+              <span style="font-size:12px;color:var(--text-muted)">compatibilidad promedio</span>
+            </div>
+          </div>
+          <div style="text-align:right">
+            <button class="btn btn-outline btn-sm" onclick="navigate('progress')">✏️ Editar perfil</button>
+          </div>
+        </div>
+
+        <!-- Filter tabs -->
+        <div class="filter-tabs" style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap">
+          <button class="btn btn-primary btn-sm active-tab" onclick="setFilter(this,'todos',renderRecommendations)">Todos</button>
+          <button class="btn btn-outline btn-sm" onclick="setFilter(this,'clinico',renderRecommendations)">Clínico</button>
+          <button class="btn btn-outline btn-sm" onclick="setFilter(this,'documentacion',renderRecommendations)">Documentación</button>
+          <button class="btn btn-outline btn-sm" onclick="setFilter(this,'medicacion',renderRecommendations)">Medicación</button>
+          <button class="btn btn-outline btn-sm" onclick="setFilter(this,'educacion',renderRecommendations)">Educación</button>
+          <button class="btn btn-outline btn-sm" onclick="setFilter(this,'uci',renderRecommendations)">UCI</button>
+        </div>
+
+        <div class="cards-grid" id="rec-grid"></div>
+      </div>
+
+      <!-- ═══════════ PAGE: TUTORIALES ═══════════ -->
+      <div class="page" id="page-tutorials">
+
+        <!-- Filter tabs -->
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+          <div class="filter-tabs" style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn btn-primary btn-sm active-tab" onclick="setFilter(this,'todos',renderTutorials)">Todos</button>
+            <button class="btn btn-outline btn-sm" onclick="setFilter(this,'Básico',renderTutorials)">Básico</button>
+            <button class="btn btn-outline btn-sm" onclick="setFilter(this,'Intermedio',renderTutorials)">Intermedio</button>
+            <button class="btn btn-outline btn-sm" onclick="setFilter(this,'Avanzado',renderTutorials)">Avanzado</button>
+          </div>
+          <div style="font-size:13px;color:var(--text-muted)">2 de 6 completados</div>
+        </div>
+
+        <div class="tutorials-grid" id="tutorials-grid"></div>
+      </div>
+
+      <!-- ═══════════ PAGE: COMPARADOR ═══════════ -->
+      <div class="page" id="page-comparator">
+        <div class="comparator-wrapper">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+            <div>
+              <h2 style="font-size:18px;font-weight:800;color:var(--secondary)">⚖️ Comparador avanzado de herramientas IA</h2>
+              <p style="font-size:13px;color:var(--text-muted);margin-top:4px">Compara con criterios ponderables de evidencia clínica y características técnicas</p>
+            </div>
+            <button class="btn btn-outline btn-sm" onclick="exportComparator()">📊 Exportar PDF</button>
+          </div>
+
+          <div class="filter-bar">
+            <div class="filter-group">
+              <label>Costo</label>
+              <select class="filter-select" onchange="state.compareFilters.cost=this.value;renderComparator()">
+                <option value="todos">Todos</option>
+                <option value="Gratuito">Gratuito</option>
+                <option value="Freemium">Freemium</option>
+                <option value="Pago">Pago</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label>Idioma</label>
+              <select class="filter-select" onchange="state.compareFilters.idioma=this.value;renderComparator()">
+                <option value="todos">Todos</option>
+                <option value="Español">Español</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label>Integración HCE</label>
+              <select class="filter-select" onchange="state.compareFilters.integracion=this.value;renderComparator()">
+                <option value="todos">Todos</option>
+                <option value="si">Con integración</option>
+                <option value="no">Sin integración</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="overflow-x:auto">
+            <table class="compare-table">
+              <thead>
+                <tr>
+                  <th>Herramienta</th>
+                  <th>Costo</th>
+                  <th>Valoración</th>
+                  <th>Idioma</th>
+                  <th>Int. HCE</th>
+                  <th>Evidencia Clínica</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+              <tbody id="compare-tbody"></tbody>
+            </table>
+          </div>
+
+          <div style="margin-top:20px;padding:16px;background:var(--bg);border-radius:10px;font-size:13px;color:var(--text-muted)">
+            ℹ️ La evidencia clínica es evaluada por un comité de enfermeros expertos con base en estudios publicados y validación en campo.
+            El sello de validación clínica garantiza que la herramienta cumple estándares de seguridad del paciente según la OPS/OMS.
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════ PAGE: MI PROGRESO ═══════════ -->
+      <div class="page" id="page-progress">
+
+        <div class="profile-hero">
+          <div class="profile-avatar-large">AM</div>
+          <div class="profile-info">
+            <h2>Ana Moreno Castillo</h2>
+            <p>Auxiliar de Enfermería · UCI Adultos · Hospital Universitario</p>
+            <div class="profile-tags">
+              <span class="profile-tag">🏅 Plan Pro</span>
+              <span class="profile-tag">⚡ Nivel Intermedio</span>
+              <span class="profile-tag">📍 Bogotá, Colombia</span>
+            </div>
+          </div>
+          <div style="margin-left:auto;text-align:right">
+            <div style="font-size:36px;font-weight:900;color:white">2.340</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.6)">puntos XP acumulados</div>
+          </div>
+        </div>
+
+        <!-- Stats row -->
+        <div class="stats-grid" style="margin-bottom:24px">
+          <div class="stat-card">
+            <div class="stat-icon green">✅</div>
+            <div class="stat-info">
+              <div class="value">2</div>
+              <div class="label">Tutoriales completados</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon blue">🔍</div>
+            <div class="stat-info">
+              <div class="value">6</div>
+              <div class="label">Herramientas exploradas</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon orange">🔥</div>
+            <div class="stat-info">
+              <div class="value">14</div>
+              <div class="label">Días de racha</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon purple">⏱️</div>
+            <div class="stat-info">
+              <div class="value">3.2h</div>
+              <div class="label">Tiempo de estudio</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div>
+            <!-- Actividad semanal -->
+            <div class="progress-card" style="margin-bottom:20px">
+              <h3>📅 Actividad semanal</h3>
+              <div class="chart-bars" style="margin-top:16px">
+                <div class="chart-bar-wrap"><div class="chart-bar" style="height:40px"></div><span class="chart-label">L</span></div>
+                <div class="chart-bar-wrap"><div class="chart-bar" style="height:70px"></div><span class="chart-label">M</span></div>
+                <div class="chart-bar-wrap"><div class="chart-bar accent" style="height:90px"></div><span class="chart-label">X</span></div>
+                <div class="chart-bar-wrap"><div class="chart-bar" style="height:50px"></div><span class="chart-label">J</span></div>
+                <div class="chart-bar-wrap"><div class="chart-bar" style="height:80px"></div><span class="chart-label">V</span></div>
+                <div class="chart-bar-wrap"><div class="chart-bar accent" style="height:60px"></div><span class="chart-label">S</span></div>
+                <div class="chart-bar-wrap"><div class="chart-bar" style="height:30px"></div><span class="chart-label">D</span></div>
+              </div>
+            </div>
+
+            <!-- Competencias -->
+            <div class="progress-card">
+              <h3>🧠 Competencias adquiridas</h3>
+              <div style="margin-top:12px">
+                <div class="progress-item">
+                  <div class="progress-item-header"><span class="pname">IA Básica aplicada</span><span class="pval">85%</span></div>
+                  <div class="progress-bar"><div class="progress-fill" style="width:85%"></div></div>
+                </div>
+                <div class="progress-item">
+                  <div class="progress-item-header"><span class="pname">Documentación digital</span><span class="pval">60%</span></div>
+                  <div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div>
+                </div>
+                <div class="progress-item">
+                  <div class="progress-item-header"><span class="pname">Seguridad del paciente</span><span class="pval">100%</span></div>
+                  <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+                </div>
+                <div class="progress-item">
+                  <div class="progress-item-header"><span class="pname">Monitoreo inteligente</span><span class="pval">40%</span></div>
+                  <div class="progress-bar"><div class="progress-fill" style="width:40%"></div></div>
+                </div>
+                <div class="progress-item">
+                  <div class="progress-item-header"><span class="pname">Farmacología IA</span><span class="pval">25%</span></div>
+                  <div class="progress-bar"><div class="progress-fill" style="width:25%"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Logros -->
+          <div>
+            <div class="progress-card">
+              <h3>🏅 Logros y badges</h3>
+              <div class="achievements-grid" style="grid-template-columns:repeat(3,1fr);margin-top:12px">
+                <div class="achievement">
+                  <span class="badge-icon">🚀</span>
+                  <div class="badge-name">Primer paso</div>
+                  <div class="badge-date">Completado</div>
+                </div>
+                <div class="achievement">
+                  <span class="badge-icon">🔍</span>
+                  <div class="badge-name">Explorador</div>
+                  <div class="badge-date">Completado</div>
+                </div>
+                <div class="achievement">
+                  <span class="badge-icon">🛡️</span>
+                  <div class="badge-name">Seguridad</div>
+                  <div class="badge-date">Completado</div>
+                </div>
+                <div class="achievement">
+                  <span class="badge-icon">🔥</span>
+                  <div class="badge-name">Racha 14</div>
+                  <div class="badge-date">Completado</div>
+                </div>
+                <div class="achievement locked">
+                  <span class="badge-icon">💡</span>
+                  <div class="badge-name">Innovador</div>
+                  <div class="badge-date">Bloqueado</div>
+                </div>
+                <div class="achievement locked">
+                  <span class="badge-icon">🏆</span>
+                  <div class="badge-name">Experto IA</div>
+                  <div class="badge-date">Bloqueado</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="notification-card" style="margin-top:16px">
+              <h3>📋 Rutas asignadas</h3>
+              <div class="notif-item">
+                <div class="notif-dot new"></div>
+                <div>
+                  <div class="notif-text"><strong>IA Básica para Enfermería</strong> — Obligatoria</div>
+                  <div class="notif-time">Vence: 30/06/2026 · 85% completado</div>
+                </div>
+              </div>
+              <div class="notif-item">
+                <div class="notif-dot info"></div>
+                <div>
+                  <div class="notif-text"><strong>Seguridad del Paciente</strong> — Completada ✓</div>
+                  <div class="notif-time">Completada el 01/06/2026</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════ PAGE: ADMIN ═══════════ -->
+      <div class="page" id="page-admin">
+
+        <div style="background:#fef3c7;border:1px solid #fde68a;border-radius:10px;padding:12px 18px;display:flex;align-items:center;gap:10px;margin-bottom:24px;font-size:13px;color:#92400e">
+          🏛️ <strong>Vista Institucional</strong> — Hospital Universitario de Bogotá · 47 auxiliares registrados
+        </div>
+
+        <div class="admin-grid">
+          <div class="admin-stat">
+            <div class="val">47</div>
+            <div class="lbl">Personal registrado</div>
+            <div class="delta">↑ +3 este mes</div>
+          </div>
+          <div class="admin-stat green">
+            <div class="val">68%</div>
+            <div class="lbl">Tasa de adopción IA</div>
+            <div class="delta">↑ +12% vs mes anterior</div>
+          </div>
+          <div class="admin-stat orange">
+            <div class="val">3</div>
+            <div class="lbl">Rutas activas asignadas</div>
+            <div class="delta">1 vence esta semana</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;margin-bottom:24px">
+          <button class="btn btn-primary" onclick="assignRoute()">📋 Asignar ruta</button>
+          <button class="btn btn-outline" onclick="showToast('📊 Generando reporte de adopción...')">📊 Exportar reporte</button>
+          <button class="btn btn-outline" onclick="showToast('📧 Invitación enviada')">✉️ Invitar personal</button>
+        </div>
+
+        <div class="staff-table-wrapper">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+            <h3 style="font-size:16px;font-weight:700;color:var(--secondary)">Personal de enfermería</h3>
+            <input type="text" placeholder="Buscar personal..." class="filter-select" style="width:220px">
+          </div>
+          <table class="staff-table">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Área</th>
+                <th>Tutoriales</th>
+                <th>Progreso</th>
+                <th>Racha</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="staff-avatar">AM</span>Ana Moreno</td>
+                <td>UCI Adultos</td>
+                <td>2/6</td>
+                <td>
+                  <div class="progress-bar" style="width:100px">
+                    <div class="progress-fill" style="width:60%"></div>
+                  </div>
+                </td>
+                <td>🔥 14 días</td>
+                <td><span class="status-dot active"></span>Activa</td>
+                <td><button class="btn btn-outline btn-sm" onclick="showToast('Perfil de Ana Moreno')">Ver perfil</button></td>
+              </tr>
+              <tr>
+                <td><span class="staff-avatar">CR</span>Carlos Ruiz</td>
+                <td>Urgencias</td>
+                <td>4/6</td>
+                <td>
+                  <div class="progress-bar" style="width:100px">
+                    <div class="progress-fill" style="width:80%"></div>
+                  </div>
+                </td>
+                <td>🔥 22 días</td>
+                <td><span class="status-dot active"></span>Activo</td>
+                <td><button class="btn btn-outline btn-sm" onclick="showToast('Perfil de Carlos Ruiz')">Ver perfil</button></td>
+              </tr>
+              <tr>
+                <td><span class="staff-avatar">MP</span>María Pérez</td>
+                <td>Hospitalización</td>
+                <td>1/6</td>
+                <td>
+                  <div class="progress-bar" style="width:100px">
+                    <div class="progress-fill" style="width:20%"></div>
+                  </div>
+                </td>
+                <td>2 días</td>
+                <td><span class="status-dot active"></span>Activa</td>
+                <td><button class="btn btn-outline btn-sm" onclick="showToast('Enviando recordatorio...')">Recordar</button></td>
+              </tr>
+              <tr>
+                <td><span class="staff-avatar">JG</span>Juliana García</td>
+                <td>Pediatría</td>
+                <td>0/6</td>
+                <td>
+                  <div class="progress-bar" style="width:100px">
+                    <div class="progress-fill" style="width:0%"></div>
+                  </div>
+                </td>
+                <td>—</td>
+                <td><span class="status-dot inactive"></span>Inactiva</td>
+                <td><button class="btn btn-outline btn-sm" onclick="showToast('Enviando recordatorio...')">Recordar</button></td>
+              </tr>
+              <tr>
+                <td><span class="staff-avatar">LM</span>Luis Martínez</td>
+                <td>UCI Neonatal</td>
+                <td>5/6</td>
+                <td>
+                  <div class="progress-bar" style="width:100px">
+                    <div class="progress-fill" style="width:92%"></div>
+                  </div>
+                </td>
+                <td>🔥 30 días</td>
+                <td><span class="status-dot active"></span>Activo</td>
+                <td><button class="btn btn-outline btn-sm" onclick="showToast('Perfil de Luis Martínez')">Ver perfil</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ═══════════ PAGE: SUSCRIPCIÓN ═══════════ -->
+      <div class="page" id="page-subscription">
+
+        <div style="text-align:center;margin-bottom:32px">
+          <h2 style="font-size:22px;font-weight:800;color:var(--secondary);margin-bottom:8px">Elige tu plan NurseAI Guide</h2>
+          <p style="font-size:14px;color:var(--text-muted)">Accede a herramientas y contenidos validados clínicamente para tu crecimiento profesional</p>
+        </div>
+
+        <div class="plans-grid">
+          <!-- Free -->
+          <div class="plan-card">
+            <div class="plan-name">🌱 Básico</div>
+            <div class="plan-price">$0<span>/mes</span></div>
+            <div class="plan-period">Siempre gratis</div>
+            <ul class="plan-features">
+              <li><span class="check">✓</span> Dashboard básico</li>
+              <li><span class="check">✓</span> 3 tutoriales/mes</li>
+              <li><span class="check">✓</span> Catálogo limitado (10 herramientas)</li>
+              <li><span class="cross">✗</span> Recomendaciones personalizadas</li>
+              <li><span class="cross">✗</span> Modo offline</li>
+              <li><span class="cross">✗</span> Comparador avanzado</li>
+              <li><span class="cross">✗</span> Sello de validación clínica</li>
+            </ul>
+            <button class="btn btn-outline" style="width:100%" onclick="selectPlan('free')">Plan actual</button>
+          </div>
+
+          <!-- Pro -->
+          <div class="plan-card featured">
+            <div class="plan-badge">⭐ MÁS POPULAR</div>
+            <div class="plan-name">🚀 Pro</div>
+            <div class="plan-price">$29.900<span>/mes</span></div>
+            <div class="plan-period">Por auxiliar · Facturación mensual</div>
+            <ul class="plan-features">
+              <li><span class="check">✓</span> Dashboard interactivo completo</li>
+              <li><span class="check">✓</span> Tutoriales ilimitados</li>
+              <li><span class="check">✓</span> Catálogo completo (60+ herramientas)</li>
+              <li><span class="check">✓</span> Recomendaciones por IA</li>
+              <li><span class="check">✓</span> Modo offline</li>
+              <li><span class="check">✓</span> Comparador avanzado + Export</li>
+              <li><span class="check">✓</span> Sello de validación clínica</li>
+            </ul>
+            <button class="btn btn-primary" style="width:100%" onclick="selectPlan('pro')">Activar Pro</button>
+          </div>
+
+          <!-- Institucional -->
+          <div class="plan-card">
+            <div class="plan-name">🏛️ Institucional</div>
+            <div class="plan-price">$199.000<span>/mes</span></div>
+            <div class="plan-period">Hasta 50 usuarios · Por institución</div>
+            <ul class="plan-features">
+              <li><span class="check">✓</span> Todo lo del plan Pro</li>
+              <li><span class="check">✓</span> Panel de administrador</li>
+              <li><span class="check">✓</span> Rutas obligatorias personalizadas</li>
+              <li><span class="check">✓</span> Reportes de adopción tecnológica</li>
+              <li><span class="check">✓</span> Soporte prioritario 24/7</li>
+              <li><span class="check">✓</span> Integración con HCE</li>
+              <li><span class="check">✓</span> Onboarding dedicado</li>
+            </ul>
+            <button class="btn btn-success" style="width:100%" onclick="selectPlan('institucional')">Contactar ventas</button>
+          </div>
+        </div>
+
+        <div style="text-align:center;margin-top:28px;padding:20px;background:white;border-radius:var(--radius);box-shadow:var(--shadow)">
+          <div style="font-size:13px;color:var(--text-muted)">
+            🔒 Pago seguro con SSL · 📅 Cancela cuando quieras · 📧 Factura electrónica incluida
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /page-content -->
+  </main>
+</div>
+
+<!-- ═══════════ MODAL ═══════════ -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Detalle</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<script src="assets/js/app.js"></script>
+</body>
+</html>
