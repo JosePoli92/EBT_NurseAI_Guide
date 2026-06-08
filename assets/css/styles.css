@@ -389,6 +389,12 @@ body {
 }
 .btn-outline:hover { background: var(--bg); }
 .btn-success { background: linear-gradient(135deg, var(--accent), #059669); color: white; }
+.btn-ghost {
+  background: rgba(255,255,255,0.12);
+  border: 1.5px solid rgba(255,255,255,0.35);
+  color: white;
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.22); }
 .btn-sm { padding: 7px 14px; font-size: 12px; border-radius: 8px; }
 
 /* ── TUTORIAL PAGE ── */
@@ -652,27 +658,31 @@ body {
 @media (max-width: 768px) {
 
   /* Sidebar reducida a 64px, solo íconos */
-  .sidebar { width: 64px; padding: 16px 0; }
+  .sidebar { width: 64px; padding: 16px 0; overflow: hidden; }
 
   .sidebar-logo {
     justify-content: center;
     padding: 0 0 20px;
     border-bottom: 1px solid rgba(255,255,255,0.1);
+    gap: 0;
   }
-  .sidebar-logo .logo-text  { display: none; }
-  .sidebar-logo .logo-icon  { width: 40px; height: 40px; font-size: 20px; border-radius: 10px; }
+  .sidebar-logo .logo-text { display: none; }
+  .sidebar-logo .logo-icon { width: 38px; height: 38px; font-size: 19px; border-radius: 10px; }
 
   .nav-section-label { display: none; }
 
   .nav-item {
     justify-content: center;
-    padding: 12px 0;
-    margin-bottom: 4px;
+    padding: 13px 0;
+    margin-bottom: 2px;
     border-radius: 0;
+    /* font-size: 0 oculta los text nodes sueltos sin afectar spans */
+    font-size: 0;
+    overflow: hidden;
+    white-space: nowrap;
   }
-  /* Oculta el texto, deja solo el ícono */
-  .nav-item > *:not(.nav-icon) { display: none; }
   .nav-item .nav-icon { font-size: 22px; width: auto; }
+  .nav-badge         { display: none; }
   .nav-item.active::before { width: 3px; height: 32px; }
 
   .sidebar-user {
@@ -680,8 +690,10 @@ body {
     padding: 10px 0;
     border-radius: 0;
     justify-content: center;
+    gap: 0;
   }
   .sidebar-user .user-info { display: none; }
+  .user-avatar { flex-shrink: 0; }
 
   /* Contenido: margen izquierdo = ancho sidebar */
   .main-content { margin-left: 64px; }
@@ -743,10 +755,11 @@ body {
 
 /* ── MÓVIL PEQUEÑO (≤ 420px) ── */
 @media (max-width: 420px) {
-  .sidebar        { width: 56px; }
-  .main-content   { margin-left: 56px; }
+  .sidebar        { width: 52px; overflow: hidden; }
+  .main-content   { margin-left: 52px; }
+  .nav-item       { padding: 12px 0; font-size: 0; }
   .nav-item .nav-icon { font-size: 20px; }
-  .sidebar-logo .logo-icon { width: 34px; height: 34px; font-size: 17px; }
+  .sidebar-logo .logo-icon { width: 32px; height: 32px; font-size: 16px; }
 
   .stats-grid     { gap: 8px; }
   .stat-card      { padding: 10px; gap: 8px; }
