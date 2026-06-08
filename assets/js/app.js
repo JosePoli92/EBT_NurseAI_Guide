@@ -76,6 +76,24 @@ const tutorials = [
   { id: 't6', title: 'Educación al Paciente con IA', icon: '🎓', bg: 'bg6', duration: '3 min', progress: 0, level: 'Básico', area: 'Educación' }
 ];
 
+// ── MENÚ MÓVIL ─────────────────────────────────────────────
+function toggleMenu() {
+  var s = document.getElementById('sidebar');
+  var o = document.getElementById('menu-overlay');
+  var open = s.classList.contains('open');
+  if (open) { closeMenu(); } else { openMenu(); }
+}
+function openMenu() {
+  document.getElementById('sidebar').classList.add('open');
+  document.getElementById('menu-overlay').classList.add('visible');
+  document.body.style.overflow = 'hidden';
+}
+function closeMenu() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('menu-overlay').classList.remove('visible');
+  document.body.style.overflow = '';
+}
+
 // ── NAVIGATION ─────────────────────────────────────────────
 function navigate(pageId) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -88,6 +106,7 @@ function navigate(pageId) {
   if (navItem) navItem.classList.add('active');
 
   state.currentPage = pageId;
+  closeMenu();
 
   const titles = {
     dashboard: { main: 'Dashboard', sub: 'Tu centro de control de IA en enfermería' },

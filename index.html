@@ -66,6 +66,9 @@
     <!-- TOPBAR -->
     <header class="topbar">
       <div class="topbar-left">
+        <button class="hamburger" id="ham-btn" onclick="toggleMenu()" aria-label="Menú">
+          <span></span><span></span><span></span>
+        </button>
         <div>
           <div class="topbar-title" id="page-title">Dashboard</div>
           <div class="topbar-subtitle" id="page-subtitle">Tu centro de control de IA en enfermería</div>
@@ -686,6 +689,9 @@
     </div><!-- /page-content -->
   </main>
 </div>
+
+<!-- overlay para cerrar menú -->
+<div class="sidebar-overlay" id="menu-overlay" onclick="closeMenu()"></div>
 
 <!-- ═══════════ MODAL ═══════════ -->
 <div class="modal-overlay" id="modal-overlay">
