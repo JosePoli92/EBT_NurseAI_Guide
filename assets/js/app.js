@@ -76,32 +76,24 @@ const tutorials = [
   { id: 't6', title: 'Educación al Paciente con IA', icon: '🎓', bg: 'bg6', duration: '3 min', progress: 0, level: 'Básico', area: 'Educación' }
 ];
 
-// ── SIDEBAR TOGGLE (móvil) ─────────────────────────────────
-function toggleSidebar() {
-  const sidebar = document.getElementById('sidebar');
-  const overlay = document.getElementById('sidebar-overlay');
-  sidebar.classList.toggle('open');
-  overlay.classList.toggle('open');
-}
-
-function closeSidebar() {
-  document.getElementById('sidebar').classList.remove('open');
-  document.getElementById('sidebar-overlay').classList.remove('open');
-}
-
 // ── NAVIGATION ─────────────────────────────────────────────
 function navigate(pageId) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.mob-nav-item').forEach(n => n.classList.remove('active'));
 
   const page = document.getElementById('page-' + pageId);
   if (page) page.classList.add('active');
 
-  const navItem = document.querySelector(`[data-page="${pageId}"]`);
+  // Sidebar desktop
+  const navItem = document.querySelector(`.nav-item[data-page="${pageId}"]`);
   if (navItem) navItem.classList.add('active');
 
+  // Barra inferior móvil
+  const mobItem = document.querySelector(`.mob-nav-item[data-page="${pageId}"]`);
+  if (mobItem) mobItem.classList.add('active');
+
   state.currentPage = pageId;
-  closeSidebar();
 
   const titles = {
     dashboard: { main: 'Dashboard', sub: 'Tu centro de control de IA en enfermería' },
