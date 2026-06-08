@@ -65,20 +65,22 @@
 
     <!-- TOPBAR -->
     <header class="topbar">
-      <div>
+      <div style="flex-shrink:0">
         <div class="topbar-title" id="page-title">Dashboard</div>
         <div class="topbar-subtitle" id="page-subtitle">Tu centro de control de IA en enfermería</div>
       </div>
-      <div class="search-bar">
-        <span class="search-icon">🔍</span>
-        <input type="text" placeholder="Buscar herramientas, tutoriales...">
-      </div>
-      <div class="topbar-actions">
-        <button class="btn btn-outline btn-sm" id="offline-btn" onclick="toggleOffline()">📥 Offline</button>
-        <button class="btn-icon" onclick="navigate('progress')">
-          🔔
-          <span class="badge"></span>
-        </button>
+      <div class="topbar-right">
+        <div class="search-bar">
+          <span class="search-icon">🔍</span>
+          <input type="text" placeholder="Buscar herramientas, tutoriales...">
+        </div>
+        <div class="topbar-actions">
+          <button class="btn btn-outline btn-sm" id="offline-btn" onclick="toggleOffline()">📥 Offline</button>
+          <button class="btn-icon" onclick="navigate('progress')">
+            🔔
+            <span class="badge"></span>
+          </button>
+        </div>
       </div>
     </header>
 
