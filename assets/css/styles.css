@@ -634,17 +634,152 @@ body {
 .match-bar .bar { flex: 1; height: 8px; background: var(--bg); border-radius: 4px; overflow: hidden; }
 .match-bar .fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); border-radius: 4px; }
 
-/* ── RESPONSIVE HELPERS ── */
+/* ── HAMBURGER BUTTON (solo móvil) ── */
+.hamburger {
+  display: none;
+  flex-direction: column; justify-content: center; gap: 5px;
+  width: 40px; height: 40px; border-radius: 10px; border: none;
+  background: var(--bg); cursor: pointer; padding: 8px;
+  flex-shrink: 0; transition: var(--transition);
+}
+.hamburger:hover { background: var(--border); }
+.hamburger span {
+  display: block; height: 2px; background: var(--secondary);
+  border-radius: 2px; transition: var(--transition);
+}
+
+/* ── SIDEBAR OVERLAY (móvil) ── */
+.sidebar-overlay {
+  display: none;
+  position: fixed; inset: 0; background: rgba(0,0,0,0.45);
+  z-index: 99; backdrop-filter: blur(2px);
+}
+.sidebar-overlay.open { display: block; }
+
+/* ── TABLET ── */
 @media (max-width: 1200px) {
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .two-col { grid-template-columns: 1fr; }
   .achievements-grid { grid-template-columns: repeat(3, 1fr); }
-}
-@media (max-width: 900px) {
-  .sidebar { transform: translateX(-260px); }
-  .sidebar.open { transform: translateX(0); }
-  .main-content { margin-left: 0; }
-  .admin-grid { grid-template-columns: 1fr; }
   .plans-grid { grid-template-columns: 1fr; }
   .plan-card.featured { transform: scale(1); }
+}
+
+/* ── MÓVIL ── */
+@media (max-width: 768px) {
+
+  /* Sidebar: oculta por defecto, desliza al abrirse */
+  .sidebar {
+    transform: translateX(-260px);
+    z-index: 100;
+    box-shadow: none;
+  }
+  .sidebar.open {
+    transform: translateX(0);
+    box-shadow: 8px 0 32px rgba(0,0,0,0.25);
+  }
+
+  /* Contenido ocupa todo el ancho */
+  .main-content { margin-left: 0; }
+
+  /* Topbar: hamburger visible, elementos apilados */
+  .hamburger { display: flex; }
+
+  .topbar {
+    padding: 12px 16px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .topbar-left {
+    display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0;
+  }
+
+  .topbar-title { font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .topbar-subtitle { display: none; }
+
+  .topbar-right {
+    width: 100%;
+    order: 2;
+    gap: 8px;
+  }
+
+  .search-bar {
+    max-width: 100%;
+  }
+
+  /* Stats: 2 columnas en móvil */
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .stat-card { padding: 14px 16px; }
+  .stat-icon { width: 40px; height: 40px; font-size: 18px; border-radius: 10px; }
+  .stat-info .value { font-size: 20px; }
+
+  /* Welcome banner */
+  .welcome-banner {
+    padding: 20px;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .welcome-banner::before, .welcome-banner::after { display: none; }
+  .welcome-badge { align-self: flex-start; }
+  .welcome-text h1 { font-size: 20px; }
+
+  /* Cards grid: 1 columna */
+  .cards-grid { grid-template-columns: 1fr; }
+  .tutorials-grid { grid-template-columns: 1fr; }
+
+  /* Two col: 1 columna */
+  .two-col { grid-template-columns: 1fr; gap: 16px; }
+
+  /* Admin */
+  .admin-grid { grid-template-columns: 1fr; }
+  .staff-table-wrapper { overflow-x: auto; }
+
+  /* Comparador */
+  .comparator-wrapper { padding: 16px; }
+  .compare-table { min-width: 600px; }
+  .filter-bar { flex-direction: column; }
+  .filter-group { min-width: 100%; }
+
+  /* Perfil */
+  .profile-hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 24px 20px;
+  }
+  .profile-hero > div:last-child { margin-left: 0; }
+  .profile-tags { justify-content: center; flex-wrap: wrap; }
+  .achievements-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+
+  /* Planes */
+  .plans-grid { grid-template-columns: 1fr; gap: 16px; }
+  .plan-card.featured { transform: scale(1); }
+
+  /* Rec profile */
+  .rec-profile-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  .rec-profile-card > div:last-child { align-self: stretch; }
+
+  /* Padding general */
+  .page-content { padding: 16px; }
+
+  /* Modal más amplio en móvil */
+  .modal { padding: 20px; width: 95%; }
+
+  /* Botón offline — solo ícono */
+  #offline-btn { font-size: 0; padding: 9px 10px; }
+  #offline-btn::before { content: '📥'; font-size: 16px; }
+}
+
+/* ── MÓVIL PEQUEÑO ── */
+@media (max-width: 420px) {
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .stat-card { padding: 12px; gap: 10px; }
+  .stat-info .value { font-size: 18px; }
+  .stat-info .label { font-size: 11px; }
+  .stat-info .trend { display: none; }
+  .welcome-text h1 { font-size: 18px; }
+  .achievements-grid { grid-template-columns: repeat(2, 1fr); }
 }

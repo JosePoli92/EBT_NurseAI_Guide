@@ -9,6 +9,9 @@
 </head>
 <body>
 
+<!-- Overlay para cerrar sidebar en móvil -->
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
 <div class="app-shell">
 
   <!-- ═══════════════════════════ SIDEBAR ═══════════════════════════ -->
@@ -65,9 +68,14 @@
 
     <!-- TOPBAR -->
     <header class="topbar">
-      <div style="flex-shrink:0">
-        <div class="topbar-title" id="page-title">Dashboard</div>
-        <div class="topbar-subtitle" id="page-subtitle">Tu centro de control de IA en enfermería</div>
+      <div class="topbar-left">
+        <button class="hamburger" id="hamburger-btn" onclick="toggleSidebar()" aria-label="Menú">
+          <span></span><span></span><span></span>
+        </button>
+        <div>
+          <div class="topbar-title" id="page-title">Dashboard</div>
+          <div class="topbar-subtitle" id="page-subtitle">Tu centro de control de IA en enfermería</div>
+        </div>
       </div>
       <div class="topbar-right">
         <div class="search-bar">
