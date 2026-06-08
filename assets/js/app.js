@@ -76,28 +76,6 @@ const tutorials = [
   { id: 't6', title: 'Educación al Paciente con IA', icon: '🎓', bg: 'bg6', duration: '3 min', progress: 0, level: 'Básico', area: 'Educación' }
 ];
 
-// ── SIDEBAR MÓVIL ──────────────────────────────────────────
-function toggleSidebar() {
-  const sidebar  = document.getElementById('sidebar');
-  const overlay  = document.getElementById('sidebar-overlay');
-  const hamburger = document.getElementById('hamburger-btn');
-  const isOpen   = sidebar.classList.contains('open');
-  sidebar.classList.toggle('open');
-  overlay.classList.toggle('open');
-  hamburger.classList.toggle('open');
-  document.body.style.overflow = isOpen ? '' : 'hidden';
-}
-
-function closeSidebar() {
-  const sidebar   = document.getElementById('sidebar');
-  const overlay   = document.getElementById('sidebar-overlay');
-  const hamburger = document.getElementById('hamburger-btn');
-  sidebar.classList.remove('open');
-  overlay.classList.remove('open');
-  hamburger.classList.remove('open');
-  document.body.style.overflow = '';
-}
-
 // ── NAVIGATION ─────────────────────────────────────────────
 function navigate(pageId) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -109,7 +87,6 @@ function navigate(pageId) {
   const navItem = document.querySelector(`.nav-item[data-page="${pageId}"]`);
   if (navItem) navItem.classList.add('active');
 
-  closeSidebar();
   state.currentPage = pageId;
 
   const titles = {
